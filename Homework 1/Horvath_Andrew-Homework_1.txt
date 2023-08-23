@@ -1,0 +1,44 @@
+1. 
+    CODASYL:
+        a) Stands for "Conference on Data Systems Languages."
+        b) Aimed to standardize database languages and interfaces.
+
+2.
+    DBTG:
+        a) Stands for "Database Task Group."
+        b) Aimed to create a standard language for managing databases.
+
+3. 
+    ANSI:
+        a) Stands for "American National Standards Institute."
+        b) Aimed to develop consensus standards, including computing.
+4.
+    DML vs. DDL:
+        DML manipulates data (SELECT, INSERT), DDL defines structure (CREATE, ALTER).
+
+5.
+    SQLite vs. SQL Server:
+        SQLite: File-based, embedded, for lightweight apps.
+        SQL Server: Server-based, enterprise-level, handles large apps.
+
+6.
+    a. 
+        DLL
+            Drop table employees;: DDL
+            Drop table departments;: DDL
+            CREATE TABLE departments(...): DDL
+            CREATE TABLE employees(...): DDL
+
+        DML
+            INSERT INTO departments VALUES ...: DML
+            INSERT INTO employees VALUES ...: DML (repeated multiple times for various entries)
+            Select * from departments;: DML
+            Select * from employees;: DML
+            SELECT designation, COUNT(*) AS nbr, (AVG(salary)) AS avg_salary ...: DML
+            SELECT name, hired_on FROM employees ORDER BY hired_on;: DML
+
+        Other:
+            Select * from sqlite_master;: Other (because it's querying system catalog)
+    b. See attached
+    c. 
+        The sqlite_master is SQLite's system table cataloging all database objects, including tables, indexes, views, and triggers. Each entry specifies the object's type (e.g., table or index), its name, the associated tbl_name, and the sql statement that created it. Querying this table provides an overview of the database's structure.
