@@ -1,0 +1,61 @@
+1.
+(a) Relation
+    - A table with a unique name, composed of rows and columns.
+
+(b) Attribute:
+    - A column in a table representing a specific property of the entity.
+
+(c) Domain:
+    - The set of permissible values for an attribute.
+
+(d) Tuple:
+    - A single row in a table, representing a record.
+
+(e) Intension and Extension:
+
+    - Intension: The structure or schema of a relation.
+    - Extension: The actual data or rows within a relation.
+
+(f) Degree and Cardinality:
+
+    - Degree: Number of attributes in a relation.
+    - Cardinality: Number of tuples or rows in a relation.
+
+2. Student (studentId, firstName, lastName, street, city, state, zipcode, telephone)
+
+a. Candidate Keys:
+    - studentId
+    - telephone
+
+b. Primary Key:
+    - studentId
+
+3. Course (courseId, courseNo, courseName, description, credits)
+
+a. Candidate Key(s):
+    - courseId
+    - courseNo
+
+b. Primary Key:
+
+    - courseId
+
+4. Section (sectionId, sectionName, coursed, term)
+
+a. Candidate Key(s):
+
+    - sectionId
+    - sectionName
+
+b. Primary Key:
+
+    - sectionId
+
+5.
+studentId	firstName	lastName	street		    city			state	zipcode	telephone		sectionId	studentId	sectionId	sectionName	courseId	term		courseId	courseNo	courseName			description					        credits
+200		    Sherlock	Holmes		222 Baker St	London			NULL	L22 3SU	NULL			2		    200		    2		    1411		1		    Fall 2023	1		    MCS 0044	Basic Algebra		Review of algebra.			        4
+500		    Micky		Mouse		5050 Mansion Dr	Beverly Hills	CA		90210	3105551212		1		    500		    1		    1410		1		    Fall 2023	1		    MCS 0044	Basic Algebra		Review of algebra.			        4
+100		    Samuel		Spade		22 Deer Rd		London			OH		43140	7401234444		1		    100		    1		    1410		1		    Fall 2023	1		    MCS 0044	Basic Algebra		Review of algebra.			        4
+400		    Donald		Duck		123 Aquatic Way	Anaheim			CA		92802	7145551212		3		    400		    3		    1722		2		    Fall 2023	2		    MCS 3543	Intro to Databases	Organization of database systems.	3
+300		    Hercule		Poirot		163 Main St		Glasgow			NULL	G11 9QX	NULL			4		    300		    4		    1732		2		    Fall 2023	2		    MCS 3543	Intro to Databases	Organization of database systems.	3
+100		    Samuel		Spade		22 Deer Rd		London			OH		43140	7401234444		3		    100		    3		    1722		2           Fall 2023	2		    MCS 3543	Intro to Databases	Organization of database systems.	3
