@@ -1,0 +1,30 @@
+1.
+a. List all single rooms with a price below ₤20 per room.
+π_roomNo, type, price(σ_type='single' AND price<20(Room))
+
+b. List all guests currently staying at the Grosvenor Hotel. (assume the current date is 10/08/23)
+π_guestName(σ_dateFrom≤'10/08/23' AND dateTo≥'10/08/23' AND hotelName='Grosvenor Hotel'(Booking ⨝ Hotel ⨝ Guest))
+
+2. Write a SQL query to list the full details of all hotels in London. The result should be ordered by hotel name and price. Price should be displayed in descending order.
+
+SELECT H.hotelName, H.city, R.roomNo, R.type, R.price
+FROM dbo.Hotel H
+JOIN dbo.Room R ON H.hotelNo = R.hotelNo
+WHERE H.city = 'London'
+ORDER BY H.hotelName, R.price DESC;
+
+NO OUTPUT (To be expected, as Hotel.sql contained no hotels in London)
+
+3. List the hotel names, guest names, guest addresses, and room numbers of all guests residing in all hotels. Order the results by hotel name, guest name, and guest address
+
+SELECT H.hotelName, G.guestName, G.guestAddress, B.roomNo
+FROM dbo.Booking B
+JOIN dbo.Guest G ON B.guestNo = G.guestNo
+JOIN dbo.Hotel H ON B.hotelNo = H.hotelNo
+ORDER BY H.hotelName, G.guestName, G.guestAddress;
+
+hotelName           guestName               guestAddress            roomNo
+Mariott Chicago     John and Jane Rockwell  12455 Rosemont Street   10
+Mariott Chicago     Steven Gunn             45 Mulhollander Drive   2
+Marriott Detroit    Sam Spade               123 Apple Lane          5
+Marriott Detroit    Steven Gunn             45 Mulhollander Drive   3
