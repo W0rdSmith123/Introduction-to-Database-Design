@@ -1,43 +1,43 @@
 Table customers {
   accountID UUID [pk]
   branchID UUID [ref: > branch.branchID]
-  firstName charVar [not null]
-  lastName charVar [not null]
+  firstName varChar [not null]
+  lastName varChar [not null]
   currentBalance double(10,2) [not null, default: 0]
-  accountType charVar(1) [not null, note: "S is savings, C is checking"]
+  accountType char [not null, note: "S is savings, C is checking"]
 }
 
 Table transactions {
   customerID UUID [pk, ref: > customers.accountID]
-  locType charVar(1) [pk, note: "A is ATM, E is Employee"]
+  locType char [pk, note: "A is ATM, E is Employee"]
   date date [pk]
   time time [pk]
   atmID UUID [pk, ref: > atm.atmID]
-  type charVar(1) [not null, note: "D is Deposit, W is Withdraw"]
+  type char [not null, note: "D is Deposit, W is Withdraw"]
   amount double(10, 2) [not null]
-  status charVar(1) [not null, note: "P is pending, A is approved, D is denied"]
+  status char [not null, note: "P is pending, A is approved, D is denied"]
 }
 
 Table atm {
   atmID UUID [pk]
-  address charVar [not null]
-  city charVar [not null]
+  address varChar [not null]
+  city varChar [not null]
 }
 
 Table branch {
   branchID UUID [pk]
-  branchName charVar [not null]
+  branchName varChar [not null]
 }
 
 Table branchContacts {
   branchID UUID [pk, ref: > branch.branchID]
-  mainPhone charVar(20) [unique]
+  mainPhone varChar(20) [unique]
 }
 
 Table customerPhone {
   customerID UUID [pk, ref: - customers.accountID]
   phoneType varChar [pk, note: "W is work, H is home, C is cell"]
-  phoneNumber charVar(20)
+  phoneNumber varChar(20)
 }
 
 Table customerEmail {
@@ -55,5 +55,5 @@ Table jointAccount {
   accountHolder1ID UUID [ref: > customers.accountID]
   accountHolder2ID UUID [ref: > customers.accountID]
   balance double(10,2) [not null, default: 0]
-  accountType charVar(1) [not null, note: "S is savings, C is checking"]
+  accountType char [not null, note: "S is savings, C is checking"]
 }
