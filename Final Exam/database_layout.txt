@@ -19,8 +19,6 @@ Table customers {
   branchID UUID [ref: > branch.branchID]
   firstName varChar [not null]
   lastName varChar [not null]
-  currentBalance double(10,2) [not null, default: 0]
-  accountType char [not null, note: "S is savings, C is checking"]
 }
 
 Table customerPhone {
@@ -39,6 +37,21 @@ Table employees {
   branchID UUID [ref: > branch.branchID]
 }
 
+Table individualAccounts {
+  accountID UUID [pk]
+  customerID UUID [ref: > customers.accountID]
+  balance double(10, 2) [not null, default: 0]
+  accountType char [not null, note: "S is savings, C is checking"]
+}
+
+Table jointAccounts {
+  accountID UUID [pk]
+  customer1ID UUID [ref: > customers.accountID]
+  customer2ID UUID [ref: > customers.accountID]
+  balance double(10,2) [not null, default: 0]
+  accountType char [not null, note: "S is savings, C is checking"]
+}
+
 Table transactions {
   customerID UUID [pk, ref: > customers.accountID]
   locType char [pk, note: "A is ATM, E is Employee"]
@@ -48,13 +61,4 @@ Table transactions {
   type char [not null, note: "D is Deposit, W is Withdraw"]
   amount double(10, 2) [not null]
   status char [not null, note: "P is pending, A is approved, D is denied"]
-}
-
-
-Table jointAccounts {
-  jointAccountID UUID [pk]
-  accountHolder1ID UUID [ref: > customers.accountID]
-  accountHolder2ID UUID [ref: > customers.accountID]
-  balance double(10,2) [not null, default: 0]
-  accountType char [not null, note: "S is savings, C is checking"]
 }
