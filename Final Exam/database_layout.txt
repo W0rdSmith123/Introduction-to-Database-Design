@@ -36,3 +36,29 @@ Table employees {
   employeeID UUID [pk]
   branchID UUID [ref: > branches.branchID]
 }
+
+Table individualAccounts {
+  accountID UUID [pk]
+  clientID UUID [ref: > clients.clientID]
+  balance double(10, 2) [not null, default: 0]
+  accountType char [not null, note: "S is savings, C is checking"]
+}
+
+Table jointAccounts {
+  accountID UUID [pk]
+  client1ID UUID [ref: > clients.clientID]
+  client2ID UUID [ref: > clients.clientID]
+  balance double(10,2) [not null, default: 0]
+  accountType char [not null, note: "S is savings, C is checking"]
+}
+
+Table transactions {
+  clientID UUID [pk, ref: > clients.clientID]
+  locType char [pk, note: "A is ATM, E is Employee"]
+  date date [pk]
+  time time [pk]
+  atmID UUID [pk, ref: > atm.atmID]
+  type char [not null, note: "D is Deposit, W is Withdraw"]
+  amount double(10, 2) [not null]
+  status char [not null, note: "P is pending, A is approved, D is denied"]
+}
