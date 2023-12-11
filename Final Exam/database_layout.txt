@@ -55,8 +55,7 @@ Table jointAccounts {
 Table transactions {
   clientID UUID [pk, ref: > clients.clientID]
   locType char [pk, note: "A is ATM, E is Employee"]
-  date date [pk]
-  time time [pk]
+  datetime timstamp [pk]
   atmID UUID [pk, ref: > atm.atmID]
   type char [not null, note: "D is Deposit, W is Withdraw"]
   amount double(10, 2) [not null]
