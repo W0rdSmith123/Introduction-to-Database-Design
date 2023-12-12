@@ -37,15 +37,11 @@ Table clients {
   addressID UUID [ref: - locations.locationID]
 }
 
-Table clientPhone {
-  clientID UUID [pk, ref: - clients.clientID]
-  phoneType varChar [pk, note: "W is work, H is home, C is cell"]
-  phoneNumber varChar(20)
-}
-
-Table clientEmail {
-  emailID varChar [pk]
+Table clientContacts {
+  contactID UUID [pk]
   clientID UUID [ref: > clients.clientID]
+  contactType char [pk, note: "E is Email, C is Cell, H is Home, W is Work]
+  contactInformation char [not null]
 }
 
 Table employees {
@@ -71,9 +67,8 @@ Table jointAccounts {
 Table transactions {
   transactionID UUID [pk]
   clientID UUID [ref: > clients.clientID]
-  locType char [not null, note: "A is ATM, E is Employee"]
+  locationID UUID [ref: > locations.locationID]
   datetime timstamp [not null]
-  atmID UUID [ref: > atm.atmID]
   type char [not null, note: "D is Deposit, W is Withdraw"]
   amount double(10, 2) [not null]
   status char [not null, note: "P is pending, A is approved, D is denied"]
