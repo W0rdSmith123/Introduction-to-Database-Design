@@ -7,9 +7,14 @@ Table addresses {
   country varChar [not null]
 }
 
+Enum locations.locationType {
+  ATM
+  Employee
+}
+
 Table locations {
   locationID UUID [pk]
-  locationType char [not null, note: "A is ATM, E is Employee"]
+  locationType locations.locationType [not null]
   locationName varChar [not null]
   addressID UUID [ref: - addresses.addressID]
 }
@@ -37,10 +42,17 @@ Table clients {
   addressID UUID [ref: - locations.locationID]
 }
 
+Enum clientContacts.contactType {
+  Email
+  Cell
+  Home
+  Work
+}
+
 Table clientContacts {
   contactID UUID [pk]
   clientID UUID [ref: > clients.clientID]
-  contactType char [pk, note: "E is Email, C is Cell, H is Home, W is Work]
+  contactType clientContacts.contactType [pk]
   contactInformation char [not null]
 }
 
@@ -49,11 +61,16 @@ Table employees {
   branchID UUID [ref: > branches.branchID]
 }
 
+Enum accountType {
+  Checking
+  Savings
+}
+
 Table individualAccounts {
   accountID UUID [pk]
   clientID UUID [ref: > clients.clientID]
   balance double(10, 2) [not null, default: 0]
-  accountType char [not null, note: "S is savings, C is checking"]
+  accountType accountType [not null]
 }
 
 Table jointAccounts {
@@ -61,7 +78,18 @@ Table jointAccounts {
   client1ID UUID [ref: > clients.clientID]
   client2ID UUID [ref: > clients.clientID]
   balance double(10,2) [not null, default: 0]
-  accountType char [not null, note: "S is savings, C is checking"]
+  accountType accountType [not null]
+}
+
+Enum transactions.type {
+  Deposit
+  Withdraw
+}
+
+Enum transactions.status {
+  Pending
+  Accepted
+  Denied
 }
 
 Table transactions {
@@ -69,7 +97,7 @@ Table transactions {
   clientID UUID [ref: > clients.clientID]
   locationID UUID [ref: > locations.locationID]
   datetime timstamp [not null]
-  type char [not null, note: "D is Deposit, W is Withdraw"]
+  type transactions.type [not null]
   amount double(10, 2) [not null]
-  status char [not null, note: "P is pending, A is approved, D is denied"]
+  status transactions.status [not null]
 }
