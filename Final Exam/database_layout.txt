@@ -1,6 +1,22 @@
+Table addresses {
+  addressID UUID [pk]
+  streetAddress varChar [not null]
+
+  city varChar [not null]
+  state varChar [not null, note: "This schema only works for the US"]
+  country varChar [not null]
+}
+
+Table locations {
+  locationID UUID [pk]
+  locationType char [not null, note: "A is ATM, E is Employee"]
+  locationName varChar [not null]
+  addressID UUID [ref: - addresses.addressID]
+}
+
 Table branches {
   branchID UUID [pk]
-  branchName varChar [not null]
+  locationID UUID [ref: - locations.locationID]
 }
 
 Table branchContacts {
@@ -10,8 +26,7 @@ Table branchContacts {
 
 Table atms {
   atmID UUID [pk]
-  address varChar [not null]
-  city varChar [not null]
+  locationID UUID [ref: - locations.locationID]
 }
 
 Table clients {
@@ -19,6 +34,7 @@ Table clients {
   branchID UUID [ref: > branches.branchID]
   firstName varChar [not null]
   lastName varChar [not null]
+  addressID UUID [ref: - locations.locationID]
 }
 
 Table clientPhone {
